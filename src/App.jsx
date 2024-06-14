@@ -1,10 +1,11 @@
-import React from "react";
-import Navbar from "./components/Navbar";
+import Todo from "./components/Todo";
+import TodoItems from "./components/TodoItems";
 
 const App = () => {
   return (
     <div>
-      <Navbar />
+      <Todo />
+      <TodoItems />
     </div>
   );
 };
