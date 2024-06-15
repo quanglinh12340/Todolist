@@ -22,10 +22,16 @@ const Todo = () => {
       },
     ]);
     inputRef.current.value = "";
+    localStorage.setItem("todos_count", count);
   };
-
   useEffect(() => {
-    console.log("🚀 ~ Todo ~ todos:", todos);
+    setTodos(JSON.parse(localStorage.getItem("todos")));
+    count = localStorage.getItem("todos_count");
+  }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      localStorage.setItem("todos", JSON.stringify(todos));
+    }, 100);
   }, [todos]);
 
   return (
@@ -45,6 +51,7 @@ const Todo = () => {
               no={item.no}
               text={item.text}
               display={item.display}
+              setTodos={setTodos}
             />
           );
         })}
