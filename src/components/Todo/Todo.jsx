@@ -22,12 +22,21 @@ const Todo = () => {
       },
     ]);
     inputRef.current.value = "";
+    inputRef.current.focus();
     localStorage.setItem("todos_count", count);
   };
+
+  const handleEnter = (e) => {
+    if (e.key == "Enter") {
+      add();
+    }
+  };
+
   useEffect(() => {
     setTodos(JSON.parse(localStorage.getItem("todos")));
     count = localStorage.getItem("todos_count");
   }, []);
+
   useEffect(() => {
     setTimeout(() => {
       localStorage.setItem("todos", JSON.stringify(todos));
@@ -38,7 +47,12 @@ const Todo = () => {
     <div className={cx("todo")}>
       <div className={cx("todo-header")}>To-do List</div>
       <div className={cx("todo-add")}>
-        <input ref={inputRef} type="text" className={cx("todo-input")} />
+        <input
+          ref={inputRef}
+          type="text"
+          className={cx("todo-input")}
+          onKeyDown={handleEnter}
+        />
         <div className={cx("todo-add-btn")} onClick={() => add()}>
           ADD
         </div>
