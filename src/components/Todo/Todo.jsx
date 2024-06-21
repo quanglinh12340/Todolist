@@ -13,17 +13,33 @@ const Todo = () => {
   const inputRef = useRef(null);
 
   const add = () => {
-    setTodos([
-      ...todos,
-      {
-        no: count++,
-        text: inputRef.current.value,
-        display: "",
-      },
-    ]);
-    inputRef.current.value = "";
-    inputRef.current.focus();
-    localStorage.setItem("todos_count", count);
+    const inputValue = inputRef.current.value.trim();
+
+    const isDuplicate = todos.some(
+      (todo) => inputRef.current.value.toUpperCase() === todo.text.toUpperCase()
+    );
+
+    if (inputValue === "") {
+      alert("Write something");
+      return;
+    } 
+     if (isDuplicate) {
+      alert("Todo is already exist!");
+      inputRef.current.value = "";
+      return;
+    } 
+      setTodos([
+        ...todos,
+        {
+          no: count++,
+          text: inputRef.current.value,
+          display: "",
+        },
+      ]);
+      inputRef.current.value = "";
+      inputRef.current.focus();
+      localStorage.setItem("todos_count", count);
+    }
   };
 
   const handleEnter = (e) => {
