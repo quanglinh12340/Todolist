@@ -6,14 +6,12 @@ import { assets } from "@/assets";
 const cx = classNames.bind(styles);
 
 const TodoItems = ({ no, text, display, setTodos }) => {
-  const deleteTodo = (no) => {
+  const deleteTodos = (no) => {
     let data = JSON.parse(localStorage.getItem("todos"));
-    console.log("🚀 ~ deleteTodo ~ data:", data);
     data = data.filter((todo) => todo.no !== no);
     setTodos(data);
   };
-
-  const toggle = (no) => {
+  const toggleTodos = (no) => {
     let data = JSON.parse(localStorage.getItem("todos"));
     for (let i = 0; i < data.length; i++) {
       if (data[i].no === no) {
@@ -27,12 +25,11 @@ const TodoItems = ({ no, text, display, setTodos }) => {
     }
     setTodos(data);
   };
-
   return (
     <div className={cx("todo-items")}>
       <div
         className={cx("todo-items-container", `${display}`)}
-        onClick={() => toggle(no)}
+        onClick={() => toggleTodos(no)}
       >
         {display === "" ? (
           <img src={assets.not_tick} />
@@ -41,7 +38,11 @@ const TodoItems = ({ no, text, display, setTodos }) => {
         )}
         <div className={cx("todo-items-text")}>{text}</div>
       </div>
-      <img src={assets.cross} onClick={() => deleteTodo(no)} />
+      <img
+        className={cx("icon-delete")}
+        src={assets.cross}
+        onClick={() => deleteTodos(no)}
+      />
     </div>
   );
 };
