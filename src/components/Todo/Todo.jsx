@@ -27,7 +27,7 @@ const Todo = () => {
   };
 
   const handleEnter = (e) => {
-    if (e.key == "Enter") {
+    if (e.key === "Enter") {
       add();
     }
   };
@@ -40,7 +40,7 @@ const Todo = () => {
   useEffect(() => {
     setTimeout(() => {
       localStorage.setItem("todos", JSON.stringify(todos));
-    }, 100);
+    }, 300);
   }, [todos]);
 
   return (
